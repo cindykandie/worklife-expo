@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { s } from 'react-native-wind';
 
 const TrainingScreen = () => {
   // Sample training content (you can fetch this data dynamically)
@@ -17,13 +16,13 @@ const TrainingScreen = () => {
   ];
 
   return (
-    <ScrollView style={s`p-4 bg-purple-400`}>
-      <Text style={s`text-2xl font-bold mb-4`}>Training</Text>
+    <ScrollView className={`p-4 bg-purple-400`}>
+      <Text className={`text-2xl font-bold mb-4`}>Training</Text>
 
       {trainingContent.map((item, index) => (
-        <View key={index} style={s`bg-white p-4 rounded shadow-md mb-2`}>
-          <Text style={s`text-lg font-bold mb-2`}>{item.title}</Text>
-          <Text style={s`text-gray-600`}>{item.description}</Text>
+        <View key={index} className={`bg-white p-4 rounded shadow-md mb-2`}>
+          <Text className={`text-lg font-bold mb-2`}>{item.title}</Text>
+          <Text className={`text-gray-600`}>{item.description}</Text>
         </View>
       ))}
     </ScrollView>
