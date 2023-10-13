@@ -1,34 +1,21 @@
 import React from 'react';
-import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
-import { Button } from 'native-base';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState } from '@react-navigation/native';
-import HomeScreen from '../screens/HomeScreen';
-import WellnessScreen from '../screens/WellnessScreen';
-import TrainingScreen from '../screens/TrainingScreen';
-import Ionicons from 'react-native-ionicons';
-import { BottomTabDescriptorMap, BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
-import { EdgeInsets } from 'react-native-safe-area-context';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text,  TouchableOpacity } from 'react-native';
+import HomeScreen from '../screens/Home';
+import WellnessScreen from '../screens/Wellness';
+import TrainingScreen from '../screens/Training';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-type CustomTabBarProps = {
-  state: TabNavigationState<ParamListBase>;
-  descriptors: BottomTabDescriptorMap;
-  navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
-  insets: EdgeInsets;
-};
+const CustomTabBar = ({ state, descriptors, navigation, insets }) => {
+  const icons = {
+    Home: 'home',
+    Wellness: 'leaf',
+    Training: 'book',
+  };
 
-  const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigation, insets }) => {
-
-    const icons = {
-        Home: 'home',
-        Wellness: 'leaf',
-        Training: 'book',
-      };
-    return (
+  return (
     <View style={{ flexDirection: 'row', backgroundColor: 'white', paddingVertical: 10 }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -53,7 +40,7 @@ type CustomTabBarProps = {
         };
 
         return (
-          <Button
+          <TouchableOpacity
             key={index}
             onPress={onPress}
             style={{
@@ -65,22 +52,21 @@ type CustomTabBarProps = {
               backgroundColor: 'transparent',
             }}
           >
-            <Icon name={icon} size={24} color={isFocused ? 'blue' : 'gray'} />
+            <Ionicons name={icon} size={24} color={isFocused ? 'blue' : 'gray'} />
             <Text style={{ color: isFocused ? 'blue' : 'gray' }}>{label}</Text>
-          </Button>
+          </TouchableOpacity>
         );
       })}
     </View>
   );
 };
 
-const MyTabs: React.FC = () => {
+const MyTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { height: 60 }, // Set the height of the tab bar
       }}
-      tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Wellness" component={WellnessScreen} />

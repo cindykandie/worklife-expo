@@ -1,9 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 
 function FeelingsJar() {
   return (
-    <View>FeelingsJar</View>
+    <View>
+            <Text>guss</Text>
+
+    </View>
   )
 }
 
